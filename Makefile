@@ -56,6 +56,9 @@ ALL_DEFINES+=-D_POSIX_SOURCE
 CC:=$(shell sh -c 'type $(CC) >/dev/null 2>/dev/null && echo $(CC) || echo gcc')
 DYN_FLAGS:=-fPIC -DMONGO_DLL_BUILD
 
+# ar
+AR = ar
+
 # Endianness check
 endian := $(shell sh -c 'echo "ab" | od -x | grep "6261" >/dev/null && echo little || echo big')
 ifeq ($(endian),big)
@@ -77,11 +80,12 @@ $(shell rm header_check.tmp tmp.c)
 TEST_DEFINES=$(ALL_DEFINES)
 TEST_DEFINES+=-DTEST_SERVER="\"127.0.0.1\""
 
-OPTIMIZATION?=-O3
+OPTIMIZATION?=-O2
 WARNINGS?=-Wall
-DEBUG?=-gdwarf-4
+DEBUG=-gdwarf-4
 STD?=c99
 PEDANTIC?=-pedantic
+CFLAGS=
 ALL_CFLAGS=-std=$(STD) $(PEDANTIC) $(CFLAGS) $(OPTIMIZATION) $(WARNINGS) $(DEBUG) $(ALL_DEFINES)
 ALL_LDFLAGS=$(LDFLAGS)
 
