@@ -267,7 +267,7 @@ MONGO_EXPORT const char *bson_data( const bson *b );
  * @param b the bson struct to inspect.
  */
 
-MONGO_EXPORT int bson_has_data( const bson *b );
+MONGO_EXPORT bson_bool_t bson_has_data( const bson *b );
 
 /**
  * Print a string representation of a BSON object.
@@ -732,7 +732,7 @@ MONGO_EXPORT int bson_finish( bson *b );
 MONGO_EXPORT void bson_destroy( bson *b );
 
 /**
- * Initialize a BSON object to an emoty object with a shared, static data
+ * Initialize a BSON object to an empty object with a shared, static data
  * buffer.
  *
  * @note You must NOT modify this object's data. It is safe though not

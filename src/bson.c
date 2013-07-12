@@ -135,6 +135,10 @@ MONGO_EXPORT const char *bson_data( const bson *b ) {
     return (const char *)b->data;
 }
 
+MONGO_EXPORT bson_bool_t bson_has_data( const bson *b ) {
+    return (bson_data(b) != NULL);
+}
+
 static char hexbyte( char hex ) {
     if (hex >= '0' && hex <= '9')
         return (hex - '0');
