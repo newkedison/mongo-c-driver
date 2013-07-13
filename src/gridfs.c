@@ -34,7 +34,7 @@
 #include <ctype.h>
 #include <assert.h>
 
-#ifndef _MSC_VER
+#if !defined(_MSC_VER) && !defined(__MINGW32__)
 #include <ctype.h>
 char *_strupr(char *str)
 {

@@ -59,7 +59,7 @@ enum gridfile_storage_type {
     GRIDFILE_NOMD5 = ( 1<<0 )
 };
 
-#ifndef _MSC_VER
+#if !defined(_MSC_VER) && !defined(__MINGW32__)
 char *_strupr(char *str);
 char *_strlwr(char *str);
 #endif
