@@ -18,6 +18,9 @@
 #if _MSC_VER && ! _CRT_SECURE_NO_WARNINGS
   #define _CRT_SECURE_NO_WARNINGS
 #endif
+#ifndef _BSD_SOURCE
+#define _BSD_SOURCE
+#endif
 
 #include <stdlib.h>
 #include <string.h>
