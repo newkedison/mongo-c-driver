@@ -11,3 +11,10 @@ script: make && make test
 branches:
   only:
     - master
+    - personal
+notifications:
+  recipients:
+    - newkedison@gmail.com
+  email:
+    on_failure: always
+
