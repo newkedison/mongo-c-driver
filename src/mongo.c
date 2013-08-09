@@ -1263,7 +1263,6 @@ static int mongo_cursor_get_more( mongo_cursor *cursor ) {
         data = mongo_data_append32( data, &limit );
         mongo_data_append64( data, &cursor->reply->fields.cursorID );
 
-        bson_free( cursor->reply );
         res = mongo_message_send( cursor->conn, mm );
         if( res != MONGO_OK ) {
             mongo_cursor_destroy( cursor );
@@ -1271,10 +1270,9 @@ static int mongo_cursor_get_more( mongo_cursor *cursor ) {
         }
 
         res = mongo_read_response( cursor->conn, &( cursor->reply ) );
-        if( res != MONGO_OK ) {
-            mongo_cursor_destroy( cursor );
+        if( res != MONGO_OK )
             return MONGO_ERROR;
-        }
+
         cursor->current.data = NULL;
         cursor->seen += cursor->reply->fields.num;
 
