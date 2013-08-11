@@ -657,6 +657,7 @@ MONGO_EXPORT int mongo_replica_set_client( mongo *conn ) {
 
                 /* Primary found, so return. */
                 else if( conn->replica_set->primary_connected ) {
+                    bson_free( conn->primary );
                     conn->primary = bson_malloc( sizeof( mongo_host_port ) );
                     snprintf( conn->primary->host, MAXHOSTNAMELEN, "%s", node->host );
                     conn->primary->port = node->port;
@@ -1263,6 +1264,7 @@ static int mongo_cursor_get_more( mongo_cursor *cursor ) {
         data = mongo_data_append32( data, &limit );
         mongo_data_append64( data, &cursor->reply->fields.cursorID );
 
+        bson_free( cursor->reply );
         res = mongo_message_send( cursor->conn, mm );
         if( res != MONGO_OK ) {
             mongo_cursor_destroy( cursor );
@@ -1380,8 +1382,10 @@ MONGO_EXPORT int mongo_cursor_next( mongo_cursor *cursor ) {
             }
         }
 
-        else
+        else {
+            cursor->err = MONGO_CURSOR_INVALID;
             return MONGO_ERROR;
+        }
     }
 
     /* first */
