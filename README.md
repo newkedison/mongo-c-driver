@@ -1,5 +1,7 @@
 # MongoDB C Driver [![Build Status](https://travis-ci.org/newkedison/mongo-c-driver.png?branch=add_travis-ci)](https://travis-ci.org/newkedison/mongo-c-driver) 
 
+Important note - please see [HISTORY.md](HISTORY.md) for API changes.
+
 This is then 10gen-supported MongoDB C driver. There are two goals for this driver.
 The first is to provide a strict, default compilation option for ultimate portability,
 no dependencies, and generic embeddability.
